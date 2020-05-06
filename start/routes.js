@@ -17,6 +17,10 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome').middleware(['simple'])
+Route.get('login', 'UserController.login').as('users.login')
+Route.post('login', 'UserController.auth').as('users.auth')
+Route.get('signup', 'UserController.signup').as('users.signup')
+Route.post('signup', 'UserController.store').as('users.store').validator('StoreUser')
 
 
 Route.resource('people', 'PersonController')

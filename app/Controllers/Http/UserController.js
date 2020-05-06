@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const User = use('App/Models/User')
+
 /**
  * Resourceful controller for interacting with users
  */
@@ -87,6 +89,35 @@ class UserController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+  }
+
+
+  async signup({ request, view, response, auth }){
+    return view.render('user.signup')
+  }
+
+  async login({ request, view, response, auth }){
+    return view.render('user.login')
+  }
+
+  async auth({ request, view, response, auth }){
+    const input = request.all()
+
+    console.log(input)
+
+  }
+  
+  async store({ request, view, response, auth }){
+    const input = request.except(['_csrf', 'submit'])
+
+    console.log(input)
+
+    const user = await User.create(input)
+
+    console.log(user)
+
+    response.redirect('/login')
+
   }
 }
 
