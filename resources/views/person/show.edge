@@ -1,0 +1,17 @@
+@layout('layouts.default')
+
+@section('content')
+  <div class="container">
+    <p>Person Name: {{ person.name }}</p>
+    <a href="{{ route('people.edit', {id: person.id} ) }}"> Edit </a>
+
+    <form action="{{ route('people.destroy', {id: person.id}) }}?_method=delete" method="post">     
+      {{ csrfField() }}
+      <button class="button is-danger" type="submit">Delete</button>
+    </form>
+    
+  </div>
+@endsection
+
+     
+      

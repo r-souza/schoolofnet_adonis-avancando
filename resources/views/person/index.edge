@@ -1,0 +1,45 @@
+@layout('layouts.default')
+
+@section('content')
+    <div class="container">
+        <table class="table is-narrow">
+            <thead>
+                <th>Name</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                @each(person in people)
+                    <tr>
+                        <td> {{ person.name }}</td>
+                        <td>
+                            <div class="field is-grouped">
+                                <a class="button is-primary" href="{{ route('people.edit', { id: person.id }) }}">Edit</a>
+                                <form action="{{ route('people.destroy', {id: person.id}) }}?_method=delete" method="post">     
+                                    {{ csrfField() }}
+                                    <button class="button is-danger" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                @endeach
+            </tbody>
+        </table>
+
+        <ul>           
+            @each(person in people)
+              <li> 
+                <a href="{{ route('people.show', { id: person.id }) }}">
+                  {{ person.name}}
+                </a>
+              </li>
+            @endeach
+        </ul>
+        <div>
+            <p>Other: {{ other }}</p>
+        </div>
+
+        <a class="button is-primary" href="{{ route('people.create') }}">Nova pessoa</a>
+    </div> 
+
+@endsection
