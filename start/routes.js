@@ -22,6 +22,7 @@ Route.get('logout', 'UserController.logout').as('users.logout')
 Route.post('login', 'UserController.auth').as('users.auth')
 Route.get('signup', 'UserController.signup').as('users.signup')
 Route.post('signup', 'UserController.store').as('users.store').validator('StoreUser')
+Route.get('profile', 'UserController.profile').as('users.profile').middleware(['auth'])
 
 
 Route.resource('people', 'PersonController')

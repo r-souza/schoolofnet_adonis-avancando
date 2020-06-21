@@ -1,0 +1,12 @@
+@layout('layouts.bulma')
+
+@section('content')
+<div id="app">
+    <div class="section">
+      <div class="container">       
+        <div class="title">Hello, {{ user.name }}</div>
+        <div class="subtitle">{{ user.email}}</div>
+      </div>
+    </div>
+  </div>
+@endsection

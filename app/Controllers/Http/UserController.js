@@ -131,6 +131,19 @@ class UserController {
     response.redirect('/login')
 
   }
+
+
+  async profile({ response, view, auth }) {
+    try {
+      await auth.check()
+    } catch (error) {
+      response.send('You are not logged in')
+    }
+
+    const user = await auth.getUser()
+
+    return view.render('user.profile', { user: user.toJSON()});
+  }
 }
 
 module.exports = UserController
