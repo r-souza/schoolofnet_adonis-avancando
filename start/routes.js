@@ -17,7 +17,8 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome').middleware(['simple'])
-Route.get('login', 'UserController.login').as('users.login')
+Route.get('login', 'UserController.login').as('users.login').middleware('guest')
+Route.get('logout', 'UserController.logout').as('users.logout')
 Route.post('login', 'UserController.auth').as('users.auth')
 Route.get('signup', 'UserController.signup').as('users.signup')
 Route.post('signup', 'UserController.store').as('users.store').validator('StoreUser')
@@ -27,3 +28,4 @@ Route.resource('people', 'PersonController')
     .validator(new Map([
         [['people.update'], ['StorePerson']]
     ]))
+    .middleware(['redirectNotLoggedIn', 'auth' ]);

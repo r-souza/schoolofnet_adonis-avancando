@@ -103,8 +103,20 @@ class UserController {
   async auth({ request, view, response, auth }){
     const input = request.all()
 
-    console.log(input)
+    const { email, password } = request.all()
 
+    const login = await auth.attempt(email, password);
+
+    if (login) {
+      response.route('people.index');
+    }
+
+  }
+
+  async logout({ response, auth }) {
+    await auth.logout();
+
+    return response.redirect('/');
   }
   
   async store({ request, view, response, auth }){
